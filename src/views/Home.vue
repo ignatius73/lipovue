@@ -1,18 +1,23 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Hola Mundo</h1>
+
+    <button @click="GoToDayBook" class="btn btn-primary">Botones con Sass</button>
+    <button @click="GoToDayBook" class="btn btn-secondary">Botones con Sass</button>
+    <button @click="GoToDayBook" class="btn btn-success">Botones con Sass</button>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  methods:{
+    GoToDayBook(){
+      this.$router.push({ name: 'dayBook'})
+    }
   }
 }
 </script>
