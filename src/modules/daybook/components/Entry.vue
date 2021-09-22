@@ -1,20 +1,43 @@
 <template>
     <div 
         class="mb-3 pointer p-2 entry-container"
-        @click="$router.push({ name: 'entry-view', params:{ id: 10 }})">
+        @click="$router.push({ name: 'entry-view', params:{ id: entry.id }})">
         <div class="entry-title d-flex">
-            <span class="text-success fs-5 fw-bold">21</span>
-            <span class="mx-1 fs-5 fw-bold">Septiembre</span>
-            <span class="text-success fs-5 fw-bold">2021</span>
+            <span class="text-success fs-5 fw-bold">{{ day }}</span>
+            <span class="mx-1 fs-5 fw-bold">{{ month }}</span>
+            <span class="text-success fs-5 fw-bold">{{ year }}</span>
         </div>
         <div class="entry-description">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, eius sunt at soluta sed architecto quis minima labore unde voluptates nisi accusantium, maiores, neque eaque. Harum amet a culpa blanditiis.</p>
+            {{ shortText }}
         </div>
     </div>
 </template>
 
 <script>
+import  getDayMonthYear  from '../helpers/getDayMonthYear'
     export default {
+        props:{
+            entry:{
+                type:Object,
+                required:true
+            }
+        },
+        computed:{
+            shortText(){
+                return ( this.entry.body.length > 40 )
+                        ? this.entry.body.substring(0,40) + '...'
+                        : this.entry.body
+            },
+            day(){
+                return getDayMonthYear(this.entry.date).day
+            },
+            month(){
+                return getDayMonthYear(this.entry.date).month
+            },
+            year(){
+                return getDayMonthYear(this.entry.date).year
+            }
+        }
 
         
     }
