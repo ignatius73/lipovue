@@ -7,6 +7,10 @@
                 v-model="term"
                 />
         </div>
+        <div class="mt-2 d-flex flex-column">
+            <button class="btn btn-primary mx-2" @click="nuevaEntrada">
+                <i class="fa fa-plus"></i>Nueva Entrada</button>
+        </div>
         <div class="entry-scroll-area">
           
             <entry v-for="entry in entriesByTerm"
@@ -38,6 +42,11 @@ import { mapGetters } from 'vuex'
             entriesByTerm(){
                 return this.getEntriesByTerm(this.term)
             }
+        },
+        methods:{
+            nuevaEntrada(){
+                this.$router.push({ name: 'entry-view', params: {id: 'new'} })
+            }
         }
         
        
@@ -49,6 +58,9 @@ import { mapGetters } from 'vuex'
         display: block;
         width:94%;
         
+    }
+    button{
+        width:90%;
     }
     .entry-list-container{
         border-right: 1px solid primary;

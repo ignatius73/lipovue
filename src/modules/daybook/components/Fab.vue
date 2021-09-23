@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button  class="btn btn-primary" @click="newEntry">
+        <button  class="btn btn-primary" @click="$emit('on:click')">
         
         <i class="fas fa-2x"
             :class="icon"></i>
@@ -16,12 +16,8 @@
                default: 'fa-plus'
             } 
 
-        },
-        methods:{
-            newEntry(){
-                console.log("Nueva Entry")
-            }
         }
+       
     }
 </script>
 

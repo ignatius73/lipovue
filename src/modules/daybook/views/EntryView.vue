@@ -27,14 +27,15 @@
         
     </template>
     
-    <fab icon="far fa-save" />
+    <fab icon="far fa-save"
+         @on:click="updateEntry" />
     <img class="img-thumbnail" src='@/assets/handball.jpg' alt="handball" />
    
 </template>
 
 <script>
 import { defineAsyncComponent } from '@vue/runtime-core'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import  getDayMonthYear  from '../helpers/getDayMonthYear'
 
     export default {
@@ -70,10 +71,35 @@ import  getDayMonthYear  from '../helpers/getDayMonthYear'
                }
         },
         methods: {
+            //mapActions me crea un método accesible por mi component
+             ...mapActions('daybook',['UpdateEntry', 'SaveEntry']),
             loadEntry(){
-                const entry =  this.getEntriesById(this.id)
-                if(!entry) return this.$router.push({ name: 'no-entry'})
-                this.entry = entry
+               let entry
+               if ( this.id === 'new'){
+                    entry = {
+                        body: '',
+                        date: new Date().getTime()
+                    }
+
+                }else{
+                    entry =  this.getEntriesById(this.id)
+                    if(!entry) return this.$router.push({ name: 'no-entry'})
+                    
+                }
+                    this.entry = entry
+                        
+                },
+            async updateEntry(){
+                if ( this.entry.id ){
+                  await this.UpdateEntry(this.entry)  
+                }else{
+                   
+                 const id = await this.SaveEntry(this.entry) 
+                 
+                 this.$router.push({ name:'entry-view', params:{ id:id }})
+                }
+               
+                
             }
         },
        
@@ -87,7 +113,8 @@ import  getDayMonthYear  from '../helpers/getDayMonthYear'
             }
 
 
-        }
+        },
+        
                 
            
         }

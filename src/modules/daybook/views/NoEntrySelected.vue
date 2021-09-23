@@ -6,7 +6,8 @@
     </div>   
     </div>
    <div class="d-flex flex-column justify-content-center">
-       <fab class="buttonFloat" />
+       <fab class="buttonFloat"
+            @on:click="createNewEntry" />
     </div>
 </template>
 
@@ -17,6 +18,13 @@ import { defineAsyncComponent } from '@vue/runtime-core'
         components:{
             fab: defineAsyncComponent( ()=> import(/*webpackchunkName:"Fabutton" */ '../components/Fab.vue'))
               
+        },
+        methods:{
+            createNewEntry(){
+                console.log("Estoy reaccionando al boton")
+                this.$router.push({ name: 'entry-view', params:{ id: 'new'}})
+                
+            }
         }
     }
 </script>

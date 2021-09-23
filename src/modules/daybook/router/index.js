@@ -1,5 +1,5 @@
 export default {
-    name:'dayBook',
+    name:'daybook',
     component: () => import(/* webpackChunkName: "DayBookLayout" */ '@/modules/daybook/layouts/dayBookLayout.vue'),
     children:[
         { path: '',
